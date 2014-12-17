@@ -2,11 +2,11 @@
  * Created by ahmedgalal on 11/7/14.
  */
 
-exports = module.exports = function (app, mongoose) {
+exports = module.exports = function(app, mongoose) {
 // Load required packages
     var oauth2orize = require('oauth2orize'),
         db = app.db.models,
-        User = db.User, Client = db.Client, Token = db.Token, Code = db.Code;
+        User=db.User, Client=db.Client, Token=db.Token, Code= db.Code;
     //var User = require('../../schema/User');
     //var Client = require('../../schema/client');
     //var Token = require('../../schema/token');
@@ -18,7 +18,7 @@ exports = module.exports = function (app, mongoose) {
 
     oauth2server.utils = {};
     oauth2server.utils.uid =
-        function (len) {
+        function(len) {
             var buf = []
                 , chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
                 , charlen = chars.length;
@@ -31,7 +31,7 @@ exports = module.exports = function (app, mongoose) {
         };
 
     oauth2server.utils.getRandomInt =
-        function (min, max) {
+        function(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         };
 
@@ -126,11 +126,7 @@ exports = module.exports = function (app, mongoose) {
             });
         }),
         function (req, res) {
-            res.render('oauth2/dialog', {
-                transactionID: req.oauth2.transactionID,
-                user: req.user,
-                client: req.oauth2.client
-            });
+            res.render('oauth2/dialog', {transactionID: req.oauth2.transactionID, user: req.user, client: req.oauth2.client});
         }
     ]
 

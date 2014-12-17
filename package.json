@@ -29,6 +29,7 @@
     "passport-google-oauth": "^0.1.5",
     "passport-http": "^0.2.2",
     "passport-http-bearer": "^1.0.1",
+    "passport-khbar4u-oauth": "^0.1.0",
     "passport-local": "^1.0.0",
     "passport-oauth": "^1.0.0",
     "passport-tumblr": "^0.1.2",

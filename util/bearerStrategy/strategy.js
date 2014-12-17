@@ -59,16 +59,14 @@ function Strategy(options, verify) {
         verify = options;
         options = {};
     }
-    if (!verify) {
-        throw new TypeError('HTTPBearerStrategy requires a verify callback');
-    }
+    if (!verify) { throw new TypeError('HTTPBearerStrategy requires a verify callback'); }
 
     passport.Strategy.call(this);
     this.name = 'token';
     this._verify = verify;
     this._realm = options.realm || 'Users';
     if (options.scope) {
-        this._scope = (Array.isArray(options.scope)) ? options.scope : [options.scope];
+        this._scope = (Array.isArray(options.scope)) ? options.scope : [ options.scope ];
     }
     this._passReqToCallback = options.passReqToCallback;
 }
@@ -85,7 +83,7 @@ util.inherits(Strategy, passport.Strategy);
  * @param {Object} req
  * @api protected
  */
-Strategy.prototype.authenticate = function (req) {
+Strategy.prototype.authenticate = function(req) {
     var token;
 
     if (req.headers && req.headers.authorization) {
@@ -103,32 +101,24 @@ Strategy.prototype.authenticate = function (req) {
     }
 
     if (req.body && req.body.access_token) {
-        if (token) {
-            return this.fail(400);
-        }
+        if (token) { return this.fail(400); }
         token = req.body.access_token;
     }
 
     if (req.query && req.query.access_token) {
-        if (token) {
-            return this.fail(400);
-        }
+        if (token) { return this.fail(400); }
         token = req.query.access_token;
     }
 
-    if (!token) {
-        return this.fail(this._challenge());
-    }
+    if (!token) { return this.fail(this._challenge()); }
 
     var self = this;
 
     function verified(err, user, info) {
-        if (err) {
-            return self.error(err);
-        }
+        if (err) { return self.error(err); }
         if (!user) {
             if (typeof info == 'string') {
-                info = {message: info}
+                info = { message: info }
             }
             info = info || {};
             return self.fail(self._challenge('invalid_token', info.message));
@@ -148,7 +138,7 @@ Strategy.prototype.authenticate = function (req) {
  *
  * @api private
  */
-Strategy.prototype._challenge = function (code, desc, uri) {
+Strategy.prototype._challenge = function(code, desc, uri) {
     var challenge = 'Bearer realm="' + this._realm + '"';
     if (this._scope) {
         challenge += ', scope="' + this._scope.join(' ') + '"';

@@ -1,7 +1,7 @@
 var Client = require('../../schema/client');
 
 // Create endpoint /api/client for POST
-exports.postClients = function (req, res) {
+exports.postClients = function(req, res) {
     // Create a new instance of the Client model
     var client = new req.app.db.models.Client();
 
@@ -12,18 +12,18 @@ exports.postClients = function (req, res) {
     client.userId = req.user._id;
 
     // Save the client and check for errors
-    client.save(function (err) {
+    client.save(function(err) {
         if (err)
             res.send(err);
 
-        res.json({message: 'Client added to the Clients!', data: client});
+        res.json({ message: 'Client added to the Clients!', data: client });
     });
 };
 
 // Create endpoint /api/clients for GET
-exports.getClients = function (req, res) {
+exports.getClients = function(req, res) {
     // Use the Client model to find all clients
-    req.app.db.models.Client.find({userId: req.user._id}, function (err, clients) {
+    req.app.db.models.Client.find({ userId: req.user._id }, function(err, clients) {
         if (err)
             res.send(err);
 
